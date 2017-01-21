@@ -1,0 +1,7 @@
+# Unity3D .gitignore file.
+Temp/*
+Library/*
+Builds/*
+*.sln
+*.csproj
+
