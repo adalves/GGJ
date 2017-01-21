@@ -5,23 +5,21 @@ using UnityEngine;
 
 public class PassengerSpawner : Singleton<PassengerSpawner>
 {
-	private int initialPassengerAmount = 75;
+	private int initialPassengerAmount = 150;
 	private Camera _camera;
 	public List<TrainPassenger> passengers = new List<TrainPassenger>();
-	public Transform spawnLimitsTopLeft;
-	public Transform spawnLimitsTopRight;
-	public Transform spawnLimitsBottomLeft;
 	public Transform trainDoor;
 	public Vector3[] cameraBounds;
+	public Transform[] spawnPoints;
 
 	void Start()
 	{
+		_camera = Camera.main;
+		cameraBounds = GetCameraBounds();
 		for (int i = 0; i < initialPassengerAmount; ++i)
 		{
 			passengers.Add(new TrainPassenger(GetRandomType()));
 		}
-		_camera = Camera.main;
-		cameraBounds = GetCameraBounds();
 	} 
 
 	private string GetRandomType()
@@ -55,4 +53,27 @@ public class PassengerSpawner : Singleton<PassengerSpawner>
 
         return bounds;
 	}
+
+	public void StartPassengers()
+	{
+		StartCoroutine(StartPassengersDelay());
+	}
+
+	private IEnumerator StartPassengersDelay()
+	{
+		for (int i = 0; i < passengers.Count; ++i)
+		{
+			passengers[i].Go();
+			yield return new WaitForSeconds(0.01f);
+		}
+		yield break;
+	}
+
+	public void StopPassengers()
+	{
+		for (int i = 0; i < passengers.Count; ++i)
+		{
+			passengers[i].Stop();
+		}
+	} 
 }
