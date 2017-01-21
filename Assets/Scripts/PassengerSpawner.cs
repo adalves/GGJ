@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class PassengerSpawner : Singleton<PassengerSpawner>
 {
-	private int initialPassengerAmount = 20;
+	private int initialPassengerAmount = 50;
 	public List<TrainPassenger> passengers = new List<TrainPassenger>();
 	public Transform spawnLimitsTopLeft;
 	public Transform spawnLimitsTopRight;
 	public Transform spawnLimitsBottomLeft;
+	public Transform trainDoor;
 
 	void Start()
 	{
