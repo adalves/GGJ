@@ -11,6 +11,4 @@ public class TrainPassenger
 		_obj = GameObject.Instantiate(Resources.Load(type)) as GameObject;
 		_obj.AddComponent<PassengerObjectController>();
 	}
-
-
 }
